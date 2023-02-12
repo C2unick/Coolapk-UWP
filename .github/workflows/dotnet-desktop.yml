@@ -8,8 +8,8 @@ jobs:
     runs-on: windows-latest
 
     env:
-      Solution_Path: CoolapkLite.sln
-      UWP_Project_Directory: CoolapkLite\CoolapkLite\
+      Solution_Path: CoolapkUWP.sln
+      UWP_Project_Directory: CoolapkUWP\CoolapkUWP\
 
     steps:
     
@@ -40,7 +40,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: test   # name：上传的artifact的名称，下载的时候需要使用。
-        path: C:\Package\x64\CoolapkLite_0.0.1.0_Test   # path：需要上传的文件夹的path
+        path: C:\Package\x64\CoolapkUWP_0.0.6.0_Test   # path：需要上传的文件夹的path
     
         
     
