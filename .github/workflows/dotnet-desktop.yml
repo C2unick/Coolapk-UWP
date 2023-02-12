@@ -1,0 +1,46 @@
+name: Release Builder
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    env:
+      Solution_Path: CoolapkLite.sln
+      UWP_Project_Directory: CoolapkLite\CoolapkLite\
+
+    steps:
+    
+    - name: Configure Pagefile
+      uses: al-cheb/configure-pagefile-action@v1.2
+      with:
+        minimum-size: 32GB
+        maximum-size: 32GB
+        disk-root: "C:"
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+ 
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.3
+        
+    - name: Build x64
+      run: msbuild $env:Solution_Path /p:Platform=x64 /p:AppxBundlePlatforms="x64" /p:AppxPackageDir=C:\Package\x64 /p:PackageCertificateKeyFile=1.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }} /restore
+      env:
+        BuildMode: SideloadOnly
+        Configuration: Release
+
+    - name: Create x64 artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: test   # name：上传的artifact的名称，下载的时候需要使用。
+        path: C:\Package\x64\CoolapkLite_0.0.1.0_Test   # path：需要上传的文件夹的path
+    
+        
+    
