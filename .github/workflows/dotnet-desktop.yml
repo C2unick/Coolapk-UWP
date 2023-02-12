@@ -40,7 +40,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: test   # name：上传的artifact的名称，下载的时候需要使用。
-        path: C:\Package\x64\CoolapkUWP_3.0.40.0_Test   # path：需要上传的文件夹的path
+        path: C:\Package\x64\CoolapkUWP_3.0.40.0_x64_Test   # path：需要上传的文件夹的path
     
         
     
